@@ -1,5 +1,7 @@
 # Quantum Terminal Live
 
+**Private repository.** Owner: [ZeroXSHDW](https://github.com/ZeroXSHDW).
+
 An 8K blue/violet cyberdeck wallpaper and matching animated macOS screen saver.
 
 The project is designed for a dark operator-console aesthetic: a centered secure core, architectural circuit layers, reflective floor geometry, restrained telemetry motion, and no green Matrix rain, falling code, text, logos, or watermark.
@@ -51,3 +53,7 @@ Keep the PNG and MOV together when moving the project to another Mac. The large 
 ## Quality and privacy
 
 The artwork contains no user data, credentials, telemetry, network endpoints, or external service configuration. The visual is intentionally local-only and contains no cloud, Copilot, or Matrix components.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
