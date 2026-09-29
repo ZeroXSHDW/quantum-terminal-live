@@ -54,6 +54,28 @@ Keep the PNG and MOV together when moving the project to another Mac. The large 
 
 The artwork contains no user data, credentials, telemetry, network endpoints, or external service configuration. The visual is intentionally local-only and contains no cloud, Copilot, or Matrix components.
 
+
+
+## Security notes
+
+- Keep this repository **private** unless it is intentionally public.
+- Never commit `.env`, API keys, tokens, session cookies, private keys, or live evidence dumps.
+- Prefer `.env.example` (or documented placeholders) for required configuration.
+- Rotate any credential that may have been pasted into chat, tickets, or screenshots.
+- Treat model / automation output as unverified until a human reviews it.
+
+
+
+## Troubleshooting
+
+| Symptom | What to try |
+|---------|-------------|
+| Local app / site will not start | Confirm runtime versions (Node/Python/macOS) match README requirements; delete stale `node_modules` / caches and reinstall from the lockfile. |
+| Secrets / auth errors | Ensure ignored `.env*` (or Keychain / Secret Store) values are set; never commit real secrets to fix a local failure. |
+| CI / checks failing | Run the same lint/test/validate command locally that CI runs; fix formatting and lockfile drift before pushing. |
+| Path-not-found on a new machine | Replace machine-specific absolute paths with `$HOME` / relative paths, or copy the documented profile layout first. |
+| Unexpected network calls | Prefer local / offline modes when documented; block outbound access if you are reviewing sensitive case material. |
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
