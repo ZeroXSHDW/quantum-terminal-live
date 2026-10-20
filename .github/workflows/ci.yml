@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-14
+    timeout-minutes: 20
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Toolchain
+        run: swiftc --version
+
+      - name: Validate repository
+        run: ./scripts/validate.sh
+
+      - name: Build
+        run: ./scripts/build.sh
+
+      - name: Smoke test
+        run: |
+          test -x build/QuantumTerminalLive
+          test -x build/QuantumLoopMaker
+          test -x build/RenderArtwork
+          test -x build/RenderFrame
+          test -x build/IconMaker
+          test -f "build/Quantum Terminal Live.app/Contents/Resources/AppIcon.icns"
+          plutil -lint "build/Quantum Terminal Live.app/Contents/Info.plist"
+          codesign --verify --strict "build/Quantum Terminal Live.app"

@@ -1,0 +1,12 @@
+.DS_Store
+build/
+dist/
+*.app
+QuantumTerminalLive
+QuantumLoopMaker
+RenderArtwork
+__pycache__/
+*.pyc
+*.log
+*.backup*
+*.before-*
