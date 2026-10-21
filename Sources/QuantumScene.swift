@@ -21,9 +21,6 @@ enum QuantumScene {
     /// briefly. The movie/preview renderers leave it at 0 for determinism.
     static var activity: CGFloat = 0.0
 
-    /// Depth plane factor for parallax - near elements shift MORE than far
-    static let depthFactor: CGFloat = 0.112
-
     /// The animated overlay is split into two passes so the live app can draw
     /// heavy vector geometry at a reduced backing scale while keeping text at
     /// full Retina resolution. The movie and preview renderers run both passes

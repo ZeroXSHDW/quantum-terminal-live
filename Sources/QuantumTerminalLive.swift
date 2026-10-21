@@ -464,6 +464,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func rebuildMenu() {
         let menu = NSMenu()
 
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            let versionItem = NSMenuItem(title: "Quantum Terminal Live v\(version)",
+                                         action: nil, keyEquivalent: "")
+            versionItem.isEnabled = false
+            menu.addItem(versionItem)
+            menu.addItem(.separator())
+        }
+
         let pauseTitle = userPaused ? "Resume Animation" : "Pause Animation"
         let pauseItem = NSMenuItem(title: pauseTitle, action: #selector(togglePause(_:)),
                                    keyEquivalent: "")
