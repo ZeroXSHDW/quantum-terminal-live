@@ -1,0 +1,95 @@
+:root {
+  --bg: #020503;
+  --panel: #06140c;
+  --green: #00ff40;
+  --mint: #52ff85;
+  --ice: #d2ffe2;
+  --red: #ff2461;
+  --amber: #bfff47;
+  --muted: #5f7f6b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: radial-gradient(1200px 800px at 50% -10%, #0a2413 0%, var(--bg) 60%);
+  color: var(--ice);
+  font-family: "SF Mono", "Menlo", "Consolas", monospace;
+  line-height: 1.6;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 5vw;
+  border-bottom: 1px solid rgba(0, 255, 64, 0.12);
+}
+.brand { color: var(--green); letter-spacing: 1px; font-weight: 700; }
+.brand em { color: var(--mint); font-style: normal; }
+.nav-link, footer a { color: var(--mint); text-decoration: none; }
+.nav-link:hover, footer a:hover { text-decoration: underline; }
+
+.hero { text-align: center; padding: 72px 5vw 40px; }
+.hero h1 {
+  font-size: clamp(28px, 5vw, 52px);
+  line-height: 1.1;
+  margin: 0 0 20px;
+  letter-spacing: -0.5px;
+}
+.accent { color: var(--green); text-shadow: 0 0 24px rgba(0, 255, 64, 0.5); }
+.sub { max-width: 720px; margin: 0 auto 30px; color: var(--muted); font-size: 17px; }
+
+.cta { margin: 6px 0; }
+.buy {
+  display: inline-block;
+  padding: 15px 38px;
+  background: var(--green);
+  color: #01150a;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  border-radius: 6px;
+  box-shadow: 0 0 30px rgba(0, 255, 64, 0.35);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.buy:hover { transform: translateY(-2px); box-shadow: 0 0 44px rgba(0, 255, 64, 0.55); }
+.cta-note { display: block; margin-top: 14px; color: var(--muted); font-size: 13px; }
+
+.preview { text-align: center; padding: 8px 5vw 48px; }
+.preview img {
+  width: min(720px, 100%);
+  border: 1px solid rgba(0, 255, 64, 0.25);
+  border-radius: 8px;
+  box-shadow: 0 0 60px rgba(0, 255, 64, 0.12);
+}
+.caption { color: var(--muted); font-size: 13px; margin-top: 12px; }
+
+.features { padding: 40px 5vw 56px; max-width: 1000px; margin: 0 auto; }
+.features h2, .buy-band h2 { color: var(--green); text-align: center; letter-spacing: 1px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 26px; }
+.card {
+  background: var(--panel);
+  border: 1px solid rgba(0, 255, 64, 0.14);
+  border-radius: 8px;
+  padding: 20px 22px;
+}
+.card h3 { color: var(--mint); margin: 0 0 10px; font-size: 15px; }
+.card p { margin: 0; color: var(--muted); font-size: 14px; }
+.card code { color: var(--ice); }
+
+.buy-band { text-align: center; padding: 56px 5vw; border-top: 1px solid rgba(0, 255, 64, 0.12); }
+.buy-band p { color: var(--muted); }
+.fine { font-size: 13px; margin-top: 18px; }
+.fine a { color: var(--mint); }
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 5vw;
+  border-top: 1px solid rgba(0, 255, 64, 0.12);
+  color: var(--muted);
+  font-size: 13px;
+}

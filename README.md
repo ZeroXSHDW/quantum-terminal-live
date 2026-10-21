@@ -1,18 +1,21 @@
 # Quantum Terminal Live
 
 [![CI](https://github.com/ZeroXSHDW/quantum-terminal-live/actions/workflows/ci.yml/badge.svg)](https://github.com/ZeroXSHDW/quantum-terminal-live/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-00ff40.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-3.1.0-00ff40)](https://github.com/ZeroXSHDW/quantum-terminal-live/releases)
+[![Buy — $5](https://img.shields.io/badge/Buy-%245-00ff40)](https://quantum-terminal.eu)
 
 <img src="Assets/AppIcon-1024.png" width="96" align="right" alt="Quantum Terminal app icon">
 
-A procedural 8K cyber-security vault for macOS — a live desktop layer and a matching 30-second screen saver.
+**A procedural 8K cyber-security vault for macOS** — a live desktop layer and a matching 30-second screen saver, drawn entirely in code.
 
 The scene is built entirely in Swift and Core Graphics: a machined iris vault, a rotating threat radar, a shield-and-lock secure core, a glowing terminal clock, server pylons, a reflective operations floor, code-rain data walls and a live sentinel console. Threat telemetry, trace-route hops and a scrolling packet ticker run around the edges; every 15 seconds the vault drops into a red lockdown state. No stock artwork, no network calls, no telemetry.
 
 ## Live preview
 
-![Quantum Terminal Live — animated preview](docs/preview-live.gif)
+![Quantum Terminal Live — live loop](docs/preview-live.gif)
 
-_This is the actual renderer — a 10-second sample (including the red lockdown) of the seamless 30-second loop, generated frame-by-frame by `RenderPreview`. Download the [full-resolution 8K loop](Assets/Quantum-Terminal-Live-30s.mov) or a [static frame](docs/preview.jpg)._
+_This is the exact 30-second loop shipped in [`Quantum-Terminal-Live-30s.mov`](Assets/Quantum-Terminal-Live-30s.mov), rendered frame-by-frame from the live scene — the GIF loops seamlessly, just like the screen saver. Watch the [full-resolution 8K loop](Assets/Quantum-Terminal-Live-30s.mov) or a [sharp static frame](docs/preview.jpg)._
 
 ## Highlights
 
@@ -33,6 +36,16 @@ _This is the actual renderer — a 10-second sample (including the red lockdown)
 - **30-second seamless 8K HEVC screen saver** — every motion term has an integer period over 30 s, so the loop has no visible seam.
 - **Aerial 4.1 integration** — installs a dedicated *Quantum Terminal* user playlist containing only this loop.
 - **Local-only** — no network endpoints, accounts, analytics, or external services.
+
+## Get it — $5
+
+Prefer the pre-built package? [Buy it for **$5**](https://quantum-terminal.eu) and get the app bundle, the 8K loop, and lifetime updates delivered instantly:
+
+1. Pay via Stripe (card / Apple Pay).
+2. Download the `.app` and the `.mov` in one click.
+3. Drag to install — done.
+
+Buying supports the project; the source stays **MIT-licensed and free to build** with `./scripts/install.sh`. See [docs/SELLING.md](docs/SELLING.md) for how the storefront is wired up.
 
 ## Requirements
 

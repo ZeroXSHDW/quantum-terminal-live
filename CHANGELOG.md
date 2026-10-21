@@ -4,6 +4,16 @@ All notable changes to Quantum Terminal Live are documented here.
 The project is procedural (no stock artwork), local-only (no network), and
 ships a seamless 30-second 8K loop.
 
+## [3.1.1] — 2026-10-20
+### Added
+- Storefront scaffold: a Matrix-themed landing page (`docs/index.html`),
+  post-payment download page (`docs/success.html`) and stylesheet, ready to be
+  hosted and wired to a Stripe Payment Link and a GitHub Release.
+- `docs/SELLING.md` — an end-to-end runbook for the $5 `.eu`-domain + Stripe flow.
+### Changed
+- README hero is now the full seamless 30-second loop (rendered from the `.mov`
+  path), plus license/version/buy badges and a purchase section.
+
 ## [3.1.0] — 2026-10-20
 ### Added
 - `RenderPreview` tool: renders a deterministic animated GIF straight from the
