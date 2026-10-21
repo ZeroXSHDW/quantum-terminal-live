@@ -89,6 +89,45 @@ set the publish directory to `docs`, and follow their DNS steps.)
    (`4242 4242 4242 4242`) in Stripe test mode.
 3. Confirm the redirect lands on `/success.html` with a working download.
 
+## 7. Showcase it on zerodevllc.eu and zerodevllc.store
+
+The showcase is a self-contained page, already hosted at:
+
+```
+https://zeroxshdw.github.io/quantum-terminal-live/showcase.html
+```
+
+Add it to any of your sites with a link **or** an embed:
+
+**Link (works everywhere):**
+
+```html
+<a href="https://zeroxshdw.github.io/quantum-terminal-live/showcase.html"
+   style="display:inline-block;padding:12px 22px;background:#00ff40;color:#01150a;
+          font-weight:700;border-radius:6px;text-decoration:none">
+  ▚ Quantum Terminal Live — $5
+</a>
+```
+
+**Embed (iframe):**
+
+```html
+<iframe src="https://zeroxshdw.github.io/quantum-terminal-live/showcase.html"
+        style="width:100%;max-width:760px;height:900px;border:0;border-radius:10px"
+        loading="lazy" title="Quantum Terminal Live"></iframe>
+```
+
+- **zerodevllc.eu** — a hand-edited HTML page; paste the snippet anywhere in
+  `<body>`. The card is dark/green, so it reads clearly against the blue page.
+- **zerodevllc.store** — Shopify: add a **Custom HTML** section (or a custom
+  page with the HTML editor) and paste the snippet. If you'd rather sell it
+  through Shopify, create a $5 digital product and swap the `REPLACE_ME` link
+  for that product's checkout URL instead of a Stripe Payment Link.
+
+> Swap `REPLACE_ME` in `docs/showcase.html` (and `docs/index.html`) for the live
+> Stripe or Shopify URL once the product exists, and the embed updates
+> automatically on the next Pages deploy.
+
 ## Notes
 
 - **Refunds & support** are handled in the Stripe dashboard (or by email).

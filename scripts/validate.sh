@@ -19,7 +19,7 @@ for f in README.md CHANGELOG.md LICENSE .gitignore .gitattributes Makefile \
          Assets/Quantum-Terminal-Live-30s.mov \
          Assets/AppIcon.icns Assets/AppIcon-1024.png \
          docs/preview.jpg docs/preview-live.gif \
-         docs/index.html docs/success.html docs/styles.css docs/SELLING.md \
+         docs/index.html docs/success.html docs/showcase.html docs/styles.css docs/SELLING.md \
          scripts/build.sh scripts/install.sh scripts/uninstall.sh \
          scripts/make-assets.sh scripts/make-icon.sh scripts/configure-aerial.py \
          scripts/golden-test.sh tests/golden-idle.jpg tests/golden-alert.jpg \
