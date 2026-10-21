@@ -4,6 +4,16 @@ All notable changes to Quantum Terminal Live are documented here.
 The project is procedural (no stock artwork), local-only (no network), and
 ships a seamless 30-second 8K loop.
 
+## [3.1.2] — 2026-10-21
+### Added
+- Live checkout: wired the active Stripe Payment Link
+  (`https://buy.stripe.com/fZu4gA5KUdlP40deDr14403`, product "QUANTUM TERMINAL
+  LIVE", €5.00 EUR) into the storefront, showcase, and README badge.
+- Relabelled price $5 → €5 to match the EUR-denominated Stripe product.
+### Changed
+- Docs: Stripe setup and link wiring marked complete; documented the one
+  remaining manual step (post-payment redirect to `success.html`).
+
 ## [3.1.1] — 2026-10-20
 ### Added
 - Storefront scaffold: a Matrix-themed landing page (`docs/index.html`),

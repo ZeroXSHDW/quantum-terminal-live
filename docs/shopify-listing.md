@@ -14,7 +14,7 @@ your attention (see "Fulfilment" below).
 | **SKU** | `QTL-SW-001` |
 | **Vendor** | ZeroDevLLC |
 | **Product type** | Digital Software Download |
-| **Price** | $5.00 (Compare-at: — ) |
+| **Price** | €5.00 (Compare-at: — ) |
 | **Charge tax** | Off for now (Stripe/Shopify tax handles EU VAT; toggle on if needed) |
 | **Track quantity** | Unchecked (digital) |
 | **Weight** | 0 (no shipping) |
@@ -84,7 +84,7 @@ Buying supports the project and saves you the build.</em></p>
 | Field | Value |
 | --- | --- |
 | **Page title** | Quantum Terminal Live — 8K Matrix Wallpaper & Screensaver for macOS |
-| **Meta description** | A procedural 8K cyber-security vault for macOS — live desktop layer and seamless 30-second screen saver. $5 instant download. |
+| **Meta description** | A procedural 8K cyber-security vault for macOS — live desktop layer and seamless 30-second screen saver. €5 instant download. |
 | **URL handle** | `quantum-terminal-live` |
 
 ## Fulfilment (digital delivery)

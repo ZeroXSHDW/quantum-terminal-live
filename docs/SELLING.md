@@ -57,6 +57,19 @@ The product and payment link are already live:
 live Payment Link above. The `success.html` download links point at the GitHub
 Release assets.
 
+### Remaining: post-payment redirect (1 click)
+
+The link currently shows Stripe's default confirmation page after payment. To
+hand customers the download automatically, set the redirect:
+
+1. In Stripe → **Payment links** → click the link → **⋯ (More options) → Edit**.
+2. Under **After payment**, choose **Redirect customers to your website**.
+3. Paste: `https://zeroxshdw.github.io/quantum-terminal-live/success.html`
+4. **Save**.
+
+Until then, buyers get Stripe's confirmation page and a receipt email — the
+`success.html` URL is still in the product description as a fallback.
+
 ## 5. Point the domain at GitHub Pages
 
 Pages is already serving `docs/`. To attach the custom domain:
