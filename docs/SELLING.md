@@ -120,9 +120,10 @@ Add it to any of your sites with a link **or** an embed:
 - **zerodevllc.eu** — a hand-edited HTML page; paste the snippet anywhere in
   `<body>`. The card is dark/green, so it reads clearly against the blue page.
 - **zerodevllc.store** — Shopify: add a **Custom HTML** section (or a custom
-  page with the HTML editor) and paste the snippet. If you'd rather sell it
-  through Shopify, create a $5 digital product and swap the `REPLACE_ME` link
-  for that product's checkout URL instead of a Stripe Payment Link.
+  page with the HTML editor) and paste the snippet. To sell it through Shopify
+  as a product instead, use the ready-to-paste listing in
+  [`docs/shopify-listing.md`](shopify-listing.md) — title, SKU, description,
+  SEO and digital-fulfilment notes are all pre-written.
 
 > Swap `REPLACE_ME` in `docs/showcase.html` (and `docs/index.html`) for the live
 > Stripe or Shopify URL once the product exists, and the embed updates
