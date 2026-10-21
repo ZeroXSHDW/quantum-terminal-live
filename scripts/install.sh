@@ -108,6 +108,12 @@ mkdir -p "$MOVIE_DIR"
 install -m 0644 "$MOVIE_SRC" "$MOVIE_DST.new"
 mv -f "$MOVIE_DST.new" "$MOVIE_DST"
 
+# The movie must be byte-identical to the source, otherwise the desktop and the
+# screen saver drift out of sync and the 30-second loop loses its seamlessness.
+if ! cmp -s "$MOVIE_SRC" "$MOVIE_DST"; then
+  echo "warning: installed movie differs from source — re-run install.sh." >&2
+fi
+
 if [ "$WITH_AERIAL" -eq 1 ]; then
   echo "==> configuring Aerial"
   python3 "$ROOT/scripts/configure-aerial.py" --movie "$MOVIE_DST"

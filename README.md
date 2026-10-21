@@ -115,7 +115,7 @@ committed icon files only:
 ./scripts/make-assets.sh --preview  # fast 1920 × 1200 previews
 ```
 
-The movie is encoded at 22 Mbps specifically so it stays below GitHub's 100 MB per-file limit (the included file is ~80 MB). If you raise the bitrate, publish the movie as a GitHub Release asset or use Git LFS.
+The movie is encoded at 22 Mbps specifically so it stays below GitHub's 100 MB per-file limit (the included file is ~80 MB). It is already tracked with **Git LFS** (`*.mov filter=lfs` in [.gitattributes](.gitattributes)); if you raise the bitrate, publish the movie as a GitHub Release asset as well.
 
 Rendering the full 8K movie takes roughly 12 minutes on an M-series Mac and writes ~80 MB.
 
@@ -180,7 +180,7 @@ docs/                   design and install documentation
 | App exits immediately | Run `~/Applications/Quantum\ Terminal\ Live.app/Contents/MacOS/QuantumTerminalLive` in Terminal and read the error. |
 | Icons hidden | Confirm the app is current; the window level must be `desktopWindow`, not `-100`. |
 | Screen saver shows another video | In Aerial, select the **Quantum Terminal** playlist; verify Aerial is the system wallpaper in System Settings. |
-| Movie too large for GitHub | Re-run `make assets` at the default 22 Mbps, use `git push`/GitHub Desktop (the web uploader has a lower limit), or attach the movie to a Release. |
+| Movie too large for GitHub | Already handled: `*.mov` is tracked with Git LFS. If a regenerated movie exceeds the LFS free tier, attach it to a Release instead. |
 | `swiftc: command not found` | Install Xcode Command Line Tools. |
 
 ## Uninstall
@@ -196,11 +196,20 @@ docs/                   design and install documentation
 ./scripts/build.sh        # compile the app and renderers
 ./scripts/validate.sh    # lint sources, plist, links, assets, file sizes
 ./scripts/golden-test.sh # re-render a reference frame and diff against tests/
+make golden              # shortcut for the golden diff
 ```
 
 The scene is fully deterministic, so `golden-test.sh` catches any visual change
 — intended or not — before it ships. Refresh the golden after an intentional
 change with `cp build/golden-now.jpg tests/golden-frame.jpg`.
+
+For runtime telemetry, launch the app with `QTL_STATS=1` to log the average
+animation tick interval to stderr every 5 s — timer drift is a proxy for
+main-thread load and reveals throttling stalls:
+
+```sh
+QTL_STATS=1 ~/Applications/Quantum\ Terminal\ Live.app/Contents/MacOS/QuantumTerminalLive
+```
 
 ## Publishing
 
