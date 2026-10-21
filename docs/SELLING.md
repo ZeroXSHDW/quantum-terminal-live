@@ -17,9 +17,8 @@ API keys in the repo, no custom server:
 > are not EU-based, pick any other TLD — the process below is identical.
 
 The repo is already **public**, GitHub Pages is **enabled** (serving `docs/` at
-`https://zeroxshdw.github.io/quantum-terminal-live/`), and a `docs/CNAME` for
-`quantum-terminal.eu` is pre-created. What remains is DNS + Stripe (both need
-your accounts).
+`https://zeroxshdw.github.io/quantum-terminal-live/`), and the storefront is live
+there now. What remains is DNS + Stripe (both need your accounts).
 
 ## 1. Buy the domain
 
@@ -27,8 +26,7 @@ your accounts).
    (Cloudflare, OVH, Gandi, Namecheap, Porkbun…).
 2. Keep it at the registrar's DNS for now; you will point it at GitHub Pages in step 5.
 
-> Prefer a different domain? Change the one line in [`docs/CNAME`](CNAME) and
-> re-commit; GitHub Pages updates automatically.
+> Prefer a different domain? Use that name in step 5 instead — nothing is hard-coded.
 
 ## 2. Prepare the download (GitHub Release)
 
@@ -69,13 +67,17 @@ with your GitHub Release download URL.
 
 Pages is already serving `docs/`. To attach the custom domain:
 
-1. In Settings → Pages, confirm the custom domain shows `quantum-terminal.eu`
-   (GitHub reads it from `docs/CNAME` on the next deployment).
-2. At your DNS registrar, create the records GitHub requests:
+1. Create `docs/CNAME` containing a single line — your domain, e.g. `quantum-terminal.eu` — and commit/push:
+   ```sh
+   echo quantum-terminal.eu > docs/CNAME && git add docs/CNAME && git commit -m "enable custom domain" && git push
+   ```
+2. In Settings → Pages, confirm the custom domain is detected (GitHub reads it
+   from `docs/CNAME` on the next deployment).
+3. At your DNS registrar, create the records GitHub requests:
    - a `CNAME` record for `www` → `zeroxshdw.github.io`, **or**
    - four `A` records for the apex (`@`) pointing at GitHub's Pages IPs:
      `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
-3. Wait for GitHub to verify and issue an HTTPS certificate (a few minutes).
+4. Wait for GitHub to verify and issue an HTTPS certificate (a few minutes).
 
 (You can also use Netlify/Vercel/Cloudflare Pages instead — connect the repo,
 set the publish directory to `docs`, and follow their DNS steps.)
