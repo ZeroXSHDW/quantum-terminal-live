@@ -28,16 +28,16 @@ there now. What remains is DNS + Stripe (both need your accounts).
 
 > Prefer a different domain? Use that name in step 5 instead — nothing is hard-coded.
 
-## 2. Prepare the download (GitHub Release)
+## 2. Prepare the download (GitHub Release) — ✅ done
 
-The paid deliverable is the **pre-built app + the 8K loop**.
+The paid deliverable is the **pre-built app + the 8K loop**, already published:
 
-1. Locally: `make dmg` to produce `build/Quantum-Terminal-Live-<version>.dmg`.
-2. On GitHub, create a **Release** and attach:
-   - `Quantum-Terminal-Live-<version>.dmg` (or a zip of the `.app`)
-   - `Assets/Quantum-Terminal-Live-30s.mov`
-3. Note the download URL (it looks like
-   `https://github.com/ZeroXSHDW/quantum-terminal-live/releases/download/v3.1.0/…`).
+- [`v3.1.1` release](https://github.com/ZeroXSHDW/quantum-terminal-live/releases/tag/v3.1.1)
+  ships `Quantum-Terminal-Live-3.1.1.dmg` and `Quantum-Terminal-Live-30s.mov`.
+- `docs/success.html` already points at both download URLs.
+
+To refresh after a future build: `make dmg`, then
+`gh release create v<version> build/*.dmg Assets/Quantum-Terminal-Live-30s.mov`.
 
 ## 3. Create the $5 product in Stripe
 
