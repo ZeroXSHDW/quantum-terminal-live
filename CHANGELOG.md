@@ -4,6 +4,9 @@ All notable changes to Quantum Terminal Live are documented here.
 The project is procedural (no stock artwork), local-only (no network), and
 ships a seamless 30-second 8K loop.
 
+## [3.0.0] — 2026-10-20
+### Added
+- Searchlight beam: a narrow rotating blade sweeping from the core once per loop, briefly illuminating the void.
 ## [2.9.0] — 2026-10-20
 ### Added
 - Core pulse rings: expanding violet sonar rings from the core on each pulse beat.

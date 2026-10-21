@@ -159,6 +159,7 @@ enum QuantumScene {
             drawEnergyRings(ctx, size: size, center: center, irisR: irisR, time: t)
             drawCore(ctx, size: size, center: center, time: t)
             drawCorePulseRings(ctx, size: size, center: center, irisR: irisR, time: t)
+            drawSearchlight(ctx, size: size, center: center, time: t)
             drawLensFlare(ctx, size: size, center: center, time: t)
             drawOrbitalTraffic(ctx, size: size, center: center, irisR: irisR, time: t)
             drawPylonTraffic(ctx, size: size, time: t)
@@ -532,6 +533,37 @@ enum QuantumScene {
             ctx.setFillColor(a(C.matrix, 0.045 * env))
             ctx.fill(CGRect(x: s * 0.004, y: y - bh * 2.2, width: w, height: bh * 0.5))
         }
+        ctx.restoreGState()
+    }
+
+    /// A narrow rotating searchlight beam sweeping from the core once per loop,
+    /// briefly illuminating the void as it passes. Classic vault aesthetic.
+    private static func drawSearchlight(_ ctx: CGContext, size: CGSize,
+                                        center: CGPoint, time: Double) {
+        let w = size.width, h = size.height
+        let s = min(w, h)
+        let ang = CGFloat(time * omega)
+        let dirX = cos(ang), dirY = sin(ang)
+        let len = max(w, h) * 1.15
+        let tip = CGPoint(x: center.x + dirX * len, y: center.y + dirY * len)
+        let width = s * 0.010
+        let perpX = -dirY * width * 0.5
+        let perpY = dirX * width * 0.5
+        let path = CGMutablePath()
+        path.move(to: center)
+        path.addLine(to: CGPoint(x: tip.x - perpX, y: tip.y - perpY))
+        path.addLine(to: CGPoint(x: tip.x + perpX, y: tip.y + perpY))
+        path.closeSubpath()
+
+        ctx.saveGState()
+        ctx.setBlendMode(.screen)
+        ctx.setFillColor(a(C.matrix, 0.028))
+        ctx.addPath(path)
+        ctx.fillPath()
+        let hotR = s * 0.014
+        ctx.setFillColor(a(C.ice, 0.09))
+        ctx.fillEllipse(in: CGRect(x: center.x - hotR, y: center.y - hotR,
+                                   width: hotR * 2, height: hotR * 2))
         ctx.restoreGState()
     }
 
