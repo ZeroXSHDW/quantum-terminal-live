@@ -3,7 +3,7 @@
 [![CI](https://github.com/ZeroXSHDW/quantum-terminal-live/actions/workflows/ci.yml/badge.svg)](https://github.com/ZeroXSHDW/quantum-terminal-live/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-00ff40.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-3.1.0-00ff40)](https://github.com/ZeroXSHDW/quantum-terminal-live/releases)
-[![Buy — $5](https://img.shields.io/badge/Buy-%245-00ff40)](https://quantum-terminal.eu)
+[![Buy — $5](https://img.shields.io/badge/Buy-%245-00ff40)](https://zeroxshdw.github.io/quantum-terminal-live/)
 
 <img src="Assets/AppIcon-1024.png" width="96" align="right" alt="Quantum Terminal app icon">
 
@@ -39,7 +39,7 @@ _This is the exact 30-second loop shipped in [`Quantum-Terminal-Live-30s.mov`](A
 
 ## Get it — $5
 
-Prefer the pre-built package? [Buy it for **$5**](https://quantum-terminal.eu) and get the app bundle, the 8K loop, and lifetime updates delivered instantly:
+Prefer the pre-built package? [Buy it for **$5**](https://zeroxshdw.github.io/quantum-terminal-live/) and get the app bundle, the 8K loop, and lifetime updates delivered instantly (storefront moves to `quantum-terminal.eu` once the domain is live):
 
 1. Pay via Stripe (card / Apple Pay).
 2. Download the `.app` and the `.mov` in one click.

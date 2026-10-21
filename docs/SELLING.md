@@ -16,11 +16,19 @@ API keys in the repo, no custom server:
 > The `.eu` TLD requires an EU-based registrant (individual or business). If you
 > are not EU-based, pick any other TLD — the process below is identical.
 
+The repo is already **public**, GitHub Pages is **enabled** (serving `docs/` at
+`https://zeroxshdw.github.io/quantum-terminal-live/`), and a `docs/CNAME` for
+`quantum-terminal.eu` is pre-created. What remains is DNS + Stripe (both need
+your accounts).
+
 ## 1. Buy the domain
 
-1. Register a domain at any registrar (Cloudflare, OVH, Gandi, Namecheap, Porkbun…),
-   e.g. `quantum-terminal.eu`.
-2. Keep it at the registrar's DNS for now; you will point it at the host in step 4.
+1. Register `quantum-terminal.eu` (or your chosen `.eu`) at any registrar
+   (Cloudflare, OVH, Gandi, Namecheap, Porkbun…).
+2. Keep it at the registrar's DNS for now; you will point it at GitHub Pages in step 5.
+
+> Prefer a different domain? Change the one line in [`docs/CNAME`](CNAME) and
+> re-commit; GitHub Pages updates automatically.
 
 ## 2. Prepare the download (GitHub Release)
 
@@ -57,20 +65,20 @@ https://buy.stripe.com/REPLACE_ME
 with your real Payment Link. In `docs/success.html`, replace the release URL
 with your GitHub Release download URL.
 
-## 5. Publish the site
+## 5. Point the domain at GitHub Pages
 
-**Option A — GitHub Pages (free):**
+Pages is already serving `docs/`. To attach the custom domain:
 
-1. Push to `master`.
-2. Settings → Pages → **Source: Deploy from a branch** → `/docs` folder.
-3. Add your custom domain `quantum-terminal.eu`; GitHub writes a `CNAME`.
-4. At your DNS registrar, add the `CNAME` record GitHub tells you to
-   (and the A records for the apex, or use `www` + redirect).
+1. In Settings → Pages, confirm the custom domain shows `quantum-terminal.eu`
+   (GitHub reads it from `docs/CNAME` on the next deployment).
+2. At your DNS registrar, create the records GitHub requests:
+   - a `CNAME` record for `www` → `zeroxshdw.github.io`, **or**
+   - four `A` records for the apex (`@`) pointing at GitHub's Pages IPs:
+     `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
+3. Wait for GitHub to verify and issue an HTTPS certificate (a few minutes).
 
-**Option B — Netlify / Vercel / Cloudflare Pages:**
-
-1. Connect the repo, set the **publish directory** to `docs`.
-2. Add the custom domain `quantum-terminal.eu` and follow the DNS instructions.
+(You can also use Netlify/Vercel/Cloudflare Pages instead — connect the repo,
+set the publish directory to `docs`, and follow their DNS steps.)
 
 ## 6. Test the whole flow
 
