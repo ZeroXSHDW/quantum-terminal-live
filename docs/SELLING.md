@@ -39,29 +39,23 @@ The paid deliverable is the **pre-built app + the 8K loop**, already published:
 To refresh after a future build: `make dmg`, then
 `gh release create v<version> build/*.dmg Assets/Quantum-Terminal-Live-30s.mov`.
 
-## 3. Create the $5 product in Stripe
+## 3. Create the €5 product in Stripe — ✅ done
 
-1. Sign up at [stripe.com](https://stripe.com) (requires identity verification —
-   name, address, bank/payout details — for payouts; this is Stripe's KYC, not
-   something this repo can automate).
-2. Go to **Products → Add product**:
-   - Name: `Quantum Terminal Live — 8K wallpaper + screensaver`
-   - Price: **$5.00** (one-time)
-3. Go to **Payment Links → Create payment link**, select that product, and set:
-   - **After payment → Redirect** → `https://quantum-terminal.eu/success.html`
-   - (Optional) require a name/email so you can re-deliver later.
-4. Copy the generated link (`https://buy.stripe.com/…`).
+The product and payment link are already live:
 
-## 4. Wire the link into the site
+- Product: **QUANTUM TERMINAL LIVE** — €5.00 (one-time)
+- Payment Link: **https://buy.stripe.com/fZu4gA5KUdlP40deDr14403**
+- Payment methods: Card, Apple Pay, Bancontact, EPS, Klarna, Link, Revolut Pay, Amazon Pay, Satispay
 
-In `docs/index.html`, replace both occurrences of:
+> The account's default currency is **EUR** (Ireland), so the product charges
+> **€5.00** rather than $5. To switch to USD, change the product currency in the
+> Stripe dashboard.
 
-```
-https://buy.stripe.com/REPLACE_ME
-```
+## 4. Wire the link into the site — ✅ done
 
-with your real Payment Link. In `docs/success.html`, replace the release URL
-with your GitHub Release download URL.
+`docs/index.html`, `docs/showcase.html`, and the README badge all point at the
+live Payment Link above. The `success.html` download links point at the GitHub
+Release assets.
 
 ## 5. Point the domain at GitHub Pages
 
