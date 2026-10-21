@@ -38,7 +38,7 @@ The scene is built entirely in Swift and Core Graphics: a machined iris vault, a
 ## Quick start
 
 ```sh
-git clone <your-repository-url> quantum-terminal-live
+git clone https://github.com/ZeroXSHDW/quantum-terminal-live.git quantum-terminal-live
 cd quantum-terminal-live
 ./scripts/install.sh
 ```

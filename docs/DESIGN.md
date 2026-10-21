@@ -120,12 +120,17 @@ deliberately absent from the vault and the central aisle.
 
 Behind everything, a faint Matrix-style digital rain fills the void in two
 parallax layers: twenty-two far columns of green half-width katakana and hex
-glyphs fall slowly with four-character trails, while six near columns use a
-larger face, brighter heads and faster fall. Faint rays radiate from the core,
-a corridor of perspective frames converges on it, twinkling motes and two dust
-layers drift at different rates, and a few near-field bokeh discs float in
-front of the vault. Together these give the vault a sense of infinite depth
-without covering the HUD.
+glyphs fall slowly and are brightened briefly by recent input, while six near
+columns use a larger face and brighter, faster heads. Faint rays radiate from
+the core, a corridor of perspective frames converges on it, twinkling motes and
+two dust layers drift at different rates, and a few near-field bokeh discs —
+which pulse brighter with keyboard/mouse activity — float in front of the vault.
+A slow volumetric light sweep and a narrow searchlight blade each rotate once
+per loop, a faint off-centre echo radar ring sits behind the main dome, violet
+pulse rings expand from the core on every heartbeat, and a horizontal lens-flare
+glare streams through it. Faint diagonal wall tracers cross the service aisle
+mid-band. Together these give the vault a sense of infinite depth without
+covering the HUD.
 
 A 120-character packet ticker scrolls at 4 characters per second along the
 bottom edge: 64 characters are visible at a time, so the text completes exactly
@@ -160,6 +165,16 @@ is why the movie can restart without a seam.
 | DEFCON level | 10 s |
 | Title RGB-split glitch | 6 s (0.1 s pulse) |
 | Threat reticle | 1 revolution |
+| Matrix rain activity boost | 3 s decay after last input |
+| Full-frame glitch | 15 s (0.12 s window) |
+| Volumetric light sweep | 1 revolution / 30 s |
+| Searchlight beam | 1 revolution / 30 s |
+| Lens flare breath | 15 s |
+| Core pulse rings | 6 s pulse (three ring phases) |
+| Echo radar dash sweep | continuous dash phase |
+| Wall tracers | 12 s traversal per streak |
+| Memory-dump bytes | continuous count (256 steps / 30 s) |
+| Process table refresh | 3 s |
 
 The live app passes elapsed wall-clock time into the same periodic functions;
 the loop maker passes `frameIndex / 30`. There is no separate animation code.
