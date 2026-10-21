@@ -1,4 +1,4 @@
-.PHONY: build assets preview icon install uninstall validate golden dmg bench live clean
+.PHONY: build assets preview icon install uninstall validate golden dmg bench live notarize clean
 
 build:
 	./scripts/build.sh
@@ -26,6 +26,9 @@ golden:
 
 dmg:
 	./scripts/make-dmg.sh
+
+notarize:
+	./scripts/notarize.sh build/Quantum-Terminal-Live-*.dmg
 
 live:
 	./scripts/build.sh >/dev/null

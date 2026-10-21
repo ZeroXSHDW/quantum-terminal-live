@@ -24,7 +24,8 @@ for f in README.md CHANGELOG.md LICENSE .gitignore .gitattributes Makefile \
          scripts/build.sh scripts/install.sh scripts/uninstall.sh \
          scripts/make-assets.sh scripts/make-icon.sh scripts/configure-aerial.py \
          scripts/golden-test.sh tests/golden-idle.jpg tests/golden-alert.jpg \
-         scripts/make-dmg.sh \
+         scripts/make-dmg.sh scripts/notarize.sh \
+         packaging/quantum-terminal-live.rb \
          .github/workflows/ci.yml; do
   if [ -f "$f" ]; then note "ok $f"; else bad "missing $f"; fi
 done

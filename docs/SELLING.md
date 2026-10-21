@@ -143,5 +143,12 @@ Add it to any of your sites with a link **or** an embed:
   enable it in the Stripe tax settings.
 - The product stays **MIT-licensed**; buyers are paying for the convenience of a
   pre-built package, not for the code.
+- **Homebrew** — a ready-to-publish cask lives at
+  [`packaging/quantum-terminal-live.rb`](../packaging/quantum-terminal-live.rb)
+  (install via `brew install --cask ./packaging/quantum-terminal-live.rb`, or
+  publish to a tap).
+- **Notarization** — `make notarize` signs and notarizes the DMG with your Apple
+  Developer ID (set `APPLE_ID`, `APPLE_APP_PASSWORD`, `APPLE_TEAM_ID`). Requires
+  a paid Apple Developer account.
 - Keep `docs/` assets light — the hero GIF is ~4 MB; don't commit the 80 MB `.mov`
   into `docs/`, host it as a Release asset instead.
