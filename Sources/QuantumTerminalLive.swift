@@ -188,6 +188,11 @@ final class QuantumCanvas: NSView {
 
     private func startAnimation() {
         guard timer == nil, !suspended else { return }
+        // Optional tick telemetry: launch with QTL_STATS=1 to log the average
+        // tick interval every five seconds to stderr. Timer drift is a useful
+        // proxy for main-thread load and reveals throttle stalls in the wild.
+        let statsEnabled = ProcessInfo.processInfo.environment["QTL_STATS"] == "1"
+        var windowStart = CACurrentMediaTime()
         let animationTimer = Timer(timeInterval: frameInterval, repeats: true) { [weak self] _ in
             guard let self, !self.suspended else { return }
             let idle = idleSeconds()
@@ -195,6 +200,15 @@ final class QuantumCanvas: NSView {
             self.updateBaseTransform(time: CACurrentMediaTime() - self.startedAt)
             self.geometryLayer.setNeedsDisplay()
             self.textLayer.setNeedsDisplay()
+            if statsEnabled {
+                let now = CACurrentMediaTime()
+                if now - windowStart >= 5.0 {
+                    let avg = String(format: "%.3f", (now - windowStart) / 5.0)
+                    FileHandle.standardError.write(
+                        ("QTL_STATS avg tick " + avg + "s\n").data(using: .utf8)!)
+                    windowStart = now
+                }
+            }
         }
         animationTimer.tolerance = 0.001
         timer = animationTimer
