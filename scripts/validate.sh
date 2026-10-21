@@ -14,10 +14,11 @@ for f in README.md CHANGELOG.md LICENSE .gitignore .gitattributes Makefile \
          Sources/QuantumArtwork.swift Sources/QuantumScene.swift \
          Sources/QuantumTerminalLive.swift Sources/QuantumLoopMaker.swift \
          Sources/IconMaker.swift \
-         Sources/RenderArtwork.swift Sources/RenderFrame.swift Sources/Info.plist \
+         Sources/RenderArtwork.swift Sources/RenderFrame.swift Sources/RenderPreview.swift Sources/Info.plist \
          Assets/quantum-terminal-live-wallpaper-8k.png \
          Assets/Quantum-Terminal-Live-30s.mov \
          Assets/AppIcon.icns Assets/AppIcon-1024.png \
+         docs/preview.jpg docs/preview-live.gif \
          scripts/build.sh scripts/install.sh scripts/uninstall.sh \
          scripts/make-assets.sh scripts/make-icon.sh scripts/configure-aerial.py \
          scripts/golden-test.sh tests/golden-idle.jpg tests/golden-alert.jpg \

@@ -1,12 +1,18 @@
 # Quantum Terminal Live
 
+[![CI](https://github.com/ZeroXSHDW/quantum-terminal-live/actions/workflows/ci.yml/badge.svg)](https://github.com/ZeroXSHDW/quantum-terminal-live/actions/workflows/ci.yml)
+
 <img src="Assets/AppIcon-1024.png" width="96" align="right" alt="Quantum Terminal app icon">
 
 A procedural 8K cyber-security vault for macOS — a live desktop layer and a matching 30-second screen saver.
 
 The scene is built entirely in Swift and Core Graphics: a machined iris vault, a rotating threat radar, a shield-and-lock secure core, a glowing terminal clock, server pylons, a reflective operations floor, code-rain data walls and a live sentinel console. Threat telemetry, trace-route hops and a scrolling packet ticker run around the edges; every 15 seconds the vault drops into a red lockdown state. No stock artwork, no network calls, no telemetry.
 
-![Quantum Terminal Live](docs/preview.jpg)
+## Live preview
+
+![Quantum Terminal Live — animated preview](docs/preview-live.gif)
+
+_This is the actual renderer — a 10-second sample (including the red lockdown) of the seamless 30-second loop, generated frame-by-frame by `RenderPreview`. Download the [full-resolution 8K loop](Assets/Quantum-Terminal-Live-30s.mov) or a [static frame](docs/preview.jpg)._
 
 ## Highlights
 

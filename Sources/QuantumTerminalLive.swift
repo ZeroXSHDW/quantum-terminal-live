@@ -478,13 +478,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func rebuildMenu() {
         let menu = NSMenu()
 
-        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            let versionItem = NSMenuItem(title: "Quantum Terminal Live v\(version)",
-                                         action: nil, keyEquivalent: "")
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
+           let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+            let versionItem = NSMenuItem(
+                title: "Quantum Terminal Live v\(version) (build \(build))",
+                action: nil, keyEquivalent: "")
             versionItem.isEnabled = false
             menu.addItem(versionItem)
             menu.addItem(.separator())
         }
+
+        let aboutItem = NSMenuItem(title: "About Quantum Terminal Live",
+                                   action: #selector(showAbout(_:)), keyEquivalent: "")
+        aboutItem.target = self
+        menu.addItem(aboutItem)
+        menu.addItem(.separator())
 
         let pauseTitle = userPaused ? "Resume Animation" : "Pause Animation"
         let pauseItem = NSMenuItem(title: pauseTitle, action: #selector(togglePause(_:)),
@@ -535,6 +543,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func togglePause(_ sender: Any?) {
         setUserPaused(!userPaused)
+    }
+
+    @objc private func showAbout(_ sender: Any?) {
+        NSApp.activate(ignoringOtherApps: true)
+        NSApp.orderFrontStandardAboutPanel(options: [
+            .applicationName: "Quantum Terminal Live"
+        ])
     }
 
     @objc private func toggleDim(_ sender: Any?) {

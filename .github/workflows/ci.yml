@@ -38,6 +38,13 @@ jobs:
           test -x build/QuantumLoopMaker
           test -x build/RenderArtwork
           test -x build/RenderFrame
+          test -x build/RenderPreview
+
+      # Advisory only: the runner's JPEG encoder may not be bit-identical to a
+      # local Mac, so a diff here flags drift for review rather than gating CI.
+      - name: Golden frames (advisory)
+        continue-on-error: true
+        run: ./scripts/golden-test.sh
           test -x build/IconMaker
           test -f "build/Quantum Terminal Live.app/Contents/Resources/AppIcon.icns"
           plutil -lint "build/Quantum Terminal Live.app/Contents/Info.plist"

@@ -20,7 +20,7 @@ if [ ! -f "$ASSET" ]; then
   exit 1
 fi
 
-mkdir -p "$BUILD/live" "$BUILD/loop" "$BUILD/artwork" "$BUILD/frame" "$BUILD/icon" \
+mkdir -p "$BUILD/live" "$BUILD/loop" "$BUILD/artwork" "$BUILD/frame" "$BUILD/preview" "$BUILD/icon" \
          "$BUILD/.module-cache" "$BUILD/.tmp"
 export TMPDIR="$BUILD/.tmp"
 export CLANG_MODULE_CACHE_PATH="$BUILD/.module-cache"
@@ -31,6 +31,7 @@ cp Sources/QuantumTerminalLive.swift "$BUILD/live/main.swift"
 cp Sources/QuantumLoopMaker.swift "$BUILD/loop/main.swift"
 cp Sources/RenderArtwork.swift "$BUILD/artwork/main.swift"
 cp Sources/RenderFrame.swift "$BUILD/frame/main.swift"
+cp Sources/RenderPreview.swift "$BUILD/preview/main.swift"
 cp Sources/IconMaker.swift "$BUILD/icon/main.swift"
 
 TARGET="$(uname -m)-apple-macosx14.0"
@@ -55,6 +56,11 @@ echo "==> RenderFrame"
 "${SWIFT[@]}" Sources/QuantumArtwork.swift Sources/QuantumScene.swift "$BUILD/frame/main.swift" \
   -o "$BUILD/RenderFrame" \
   -framework AppKit -framework CoreGraphics
+
+echo "==> RenderPreview"
+"${SWIFT[@]}" Sources/QuantumArtwork.swift Sources/QuantumScene.swift "$BUILD/preview/main.swift" \
+  -o "$BUILD/RenderPreview" \
+  -framework AppKit -framework CoreGraphics -framework ImageIO
 
 echo "==> IconMaker"
 "${SWIFT[@]}" "$BUILD/icon/main.swift" \
@@ -86,4 +92,5 @@ echo "  $APP"
 echo "  $BUILD/QuantumLoopMaker"
 echo "  $BUILD/RenderArtwork"
 echo "  $BUILD/RenderFrame"
+echo "  $BUILD/RenderPreview"
 echo "  $BUILD/IconMaker"

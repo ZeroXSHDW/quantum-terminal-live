@@ -4,6 +4,20 @@ All notable changes to Quantum Terminal Live are documented here.
 The project is procedural (no stock artwork), local-only (no network), and
 ships a seamless 30-second 8K loop.
 
+## [3.1.0] — 2026-10-20
+### Added
+- `RenderPreview` tool: renders a deterministic animated GIF straight from the
+  live scene (ImageIO, no external deps). The README hero is now a real live
+  view — a 10 s sample of the loop that sweeps into the 15 s red lockdown.
+- About panel in the menu bar (version + build shown inline too).
+- In-tree benchmark harness (`tools/Bench/main.swift`, `make bench`) so frame
+  cost is reproducible from a fresh clone.
+- CI runs the golden frame diff as an advisory step, so render drift is flagged
+  on every push without gating (runner JPEG encoders may differ from local).
+
+### Changed
+- validate.sh now requires the animated preview, both goldens, and the new tool.
+
 ## [3.0.1] — 2026-10-20
 ### Added
 - Dual golden reference frames: the idle scene (t=8) and the alert window
