@@ -34,17 +34,11 @@ No secrets or external services are required.
 
 ## Large files
 
-The movie is intentionally under 100 MiB. If you regenerate it at a higher
-bitrate:
-
-- attach it to a GitHub Release and remove it from the commit, or
-- track `Assets/*.mov` with Git LFS:
-
-```sh
-git lfs install
-git lfs track "Assets/*.mov"
-git add .gitattributes Assets/Quantum-Terminal-Live-30s.mov
-```
+`Assets/*.mov` is already tracked with **Git LFS** (see the
+`*.mov` rule in [.gitattributes](.gitattributes)):
+the pointer lives in history and the binary is uploaded to LFS storage. If you
+regenerate the movie at a higher bitrate and the LFS plan becomes a concern,
+attach the file to a GitHub Release instead.
 
 ## Before making the repository public
 

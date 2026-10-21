@@ -195,13 +195,21 @@ docs/                   design and install documentation
 ```sh
 ./scripts/build.sh        # compile the app and renderers
 ./scripts/validate.sh    # lint sources, plist, links, assets, file sizes
-./scripts/golden-test.sh # re-render a reference frame and diff against tests/
+./scripts/golden-test.sh # re-render idle + alert reference frames, diff against tests/
+./scripts/make-dmg.sh    # distributable DMG with a drag-to-Applications layout
 make golden              # shortcut for the golden diff
+make dmg                 # shortcut for the DMG build
 ```
 
-The scene is fully deterministic, so `golden-test.sh` catches any visual change
-— intended or not — before it ships. Refresh the golden after an intentional
-change with `cp build/golden-now.jpg tests/golden-frame.jpg`.
+The scene is fully deterministic, so `golden-test.sh` compares both a reference
+idle frame (t=8.0) and an alert-window frame (t=15.4) byte-for-byte against
+`tests/`. That catches any visual change — intended or not — including the
+red-alert branch. Refresh the goldens after an intentional change with:
+
+```sh
+cp build/golden-idle-now.jpg  tests/golden-idle.jpg
+cp build/golden-alert-now.jpg tests/golden-alert.jpg
+```
 
 For runtime telemetry, launch the app with `QTL_STATS=1` to log the average
 animation tick interval to stderr every 5 s — timer drift is a proxy for

@@ -1,4 +1,4 @@
-.PHONY: build assets preview icon install uninstall validate golden clean
+.PHONY: build assets preview icon install uninstall validate golden dmg clean
 
 build:
 	./scripts/build.sh
@@ -23,6 +23,9 @@ validate:
 
 golden:
 	./scripts/golden-test.sh
+
+dmg:
+	./scripts/make-dmg.sh
 
 clean:
 	rm -rf build

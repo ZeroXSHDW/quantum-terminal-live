@@ -20,7 +20,8 @@ for f in README.md CHANGELOG.md LICENSE .gitignore .gitattributes Makefile \
          Assets/AppIcon.icns Assets/AppIcon-1024.png \
          scripts/build.sh scripts/install.sh scripts/uninstall.sh \
          scripts/make-assets.sh scripts/make-icon.sh scripts/configure-aerial.py \
-         scripts/golden-test.sh tests/golden-frame.jpg \
+         scripts/golden-test.sh tests/golden-idle.jpg tests/golden-alert.jpg \
+         scripts/make-dmg.sh \
          .github/workflows/ci.yml; do
   if [ -f "$f" ]; then note "ok $f"; else bad "missing $f"; fi
 done

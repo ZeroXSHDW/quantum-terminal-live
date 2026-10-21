@@ -4,6 +4,18 @@ All notable changes to Quantum Terminal Live are documented here.
 The project is procedural (no stock artwork), local-only (no network), and
 ships a seamless 30-second 8K loop.
 
+## [3.0.1] — 2026-10-20
+### Added
+- Dual golden reference frames: the idle scene (t=8) and the alert window
+  (t=15.4) are both diffed byte-for-byte, so threat-state regressions are caught too.
+- Distro packaging: `scripts/make-dmg.sh` and `make dmg` build an unsigned,
+  drag-to-install DMG (verified mountable).
+### Changed
+- Benchmarked a memoized-color experiment; `copy(alpha:)` was measurably
+  cheaper, so the straight implementation is kept.
+- Docs: PUBLISHING.md now reflects that the movie is LFS-tracked by default;
+  README documents DMG build and per-frame golden refresh.
+
 ## [3.0.0] — 2026-10-20
 ### Added
 - Searchlight beam: a narrow rotating blade sweeping from the core once per loop, briefly illuminating the void.
