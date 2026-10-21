@@ -149,6 +149,7 @@ enum QuantumScene {
             drawDepthDust(ctx, size: size, center: center, time: t)
             drawTwinkle(ctx, size: size, time: t)
             drawMatrixRain(ctx, size: size, time: t)
+            drawComets(ctx, size: size, time: t)
             drawRadar(ctx, size: size, center: center, time: t, detail: detail)
             drawBeam(ctx, size: size, center: center, irisR: irisR, time: t)
             drawEnergyRings(ctx, size: size, center: center, irisR: irisR, time: t)
@@ -499,6 +500,28 @@ enum QuantumScene {
         ctx.restoreGState()
     }
 
+    /// A few bright streaks crossing the void, leaving a short fading trail.
+    /// One traversal per loop, so they stay seamless.
+    private static func drawComets(_ ctx: CGContext, size: CGSize, time: Double) {
+        let w = size.width, h = size.height
+        let s = min(w, h)
+        for i in 0..<3 {
+            let speed = 0.5 + 0.25 * rand(i * 19 + 2)
+            let phase = rand(i * 23 + 4)
+            let p = (time / loopDuration * speed + phase).truncatingRemainder(dividingBy: 1.0)
+            let headX = CGFloat(p) * (w + s * 0.4) - s * 0.2
+            let headY = h * (0.22 + 0.52 * rand(i * 5 + 1))
+            for k in 0..<5 {
+                let f = CGFloat(k) / 5.0
+                let tx = headX - s * 0.075 * f
+                let ty = headY + s * 0.045 * f
+                let r = s * 0.0016 * (1.0 - f * 0.55)
+                ctx.setFillColor(a(C.ice, CGFloat(0.34 * (1.0 - f))))
+                ctx.fillEllipse(in: CGRect(x: tx - r, y: ty - r, width: r * 2, height: r * 2))
+            }
+        }
+    }
+
     // MARK: - Radar dome
 
     private static func drawRadar(_ ctx: CGContext, size: CGSize, center: CGPoint,
@@ -565,19 +588,22 @@ enum QuantumScene {
             ctx.strokePath()
         }
 
-        // Rotating sweep.
+        // Rotating sweep with a phosphor afterglow trail (stepped wedges).
         let sweep = -time * omega * 2.0 + Double.pi * 0.55
         let wedge = 0.70
-        ctx.setFillColor(a(C.cyan, 0.030))
-        ctx.beginPath()
-        ctx.move(to: center)
-        ctx.addArc(center: center, radius: radius,
-                   startAngle: CGFloat(sweep - wedge), endAngle: CGFloat(sweep),
-                   clockwise: false)
-        ctx.closePath()
-        ctx.fillPath()
+        for k in 0..<4 {
+            let back = wedge * (CGFloat(k) + 1.0) / 4.0
+            ctx.setFillColor(a(C.cyan, CGFloat(0.055 - Double(k) * 0.012)))
+            ctx.beginPath()
+            ctx.move(to: center)
+            ctx.addArc(center: center, radius: radius,
+                       startAngle: CGFloat(sweep - back), endAngle: CGFloat(sweep),
+                       clockwise: false)
+            ctx.closePath()
+            ctx.fillPath()
+        }
 
-        ctx.setStrokeColor(a(C.cyan, 0.32))
+        ctx.setStrokeColor(a(C.cyan, 0.38))
         ctx.setLineWidth(max(1.5, h * 0.0015))
         ctx.move(to: center)
         ctx.addLine(to: CGPoint(x: center.x + CGFloat(cos(sweep)) * radius,
@@ -751,17 +777,18 @@ enum QuantumScene {
         let s = min(w, h)
         let pulse = CGFloat((sin(time * omega * 4.0) + 1.0) * 0.5)
         let coreR = s * 0.060
+        let breath = 0.82 + 0.18 * pulse
 
-        // Bloom.
+        // Bloom: a hot centre fading through the mint ring, breathing slowly.
         let bloom = [
-            a(C.blue, 0.22),
-            a(C.violet, 0.10),
+            a(C.matrix, 0.34 * breath),
+            a(C.violet, 0.16 * breath),
             a(C.violet, 0.0)
         ] as CFArray
         if let g = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: bloom,
                               locations: [0.0, 0.38, 1.0]) {
             ctx.drawRadialGradient(g, startCenter: center, startRadius: 0,
-                                   endCenter: center, endRadius: coreR * 5.0, options: [])
+                                   endCenter: center, endRadius: coreR * 6.0, options: [])
         }
 
         // Rotating targeting reticle.
@@ -1163,7 +1190,7 @@ enum QuantumScene {
         let barY = hashY - micro * 2.20
         let barW = min(s * 0.196, w * 0.205)
         let reading = chrono(wallClock, time: time)
-        let valueAlpha: CGFloat = 0.62
+        let valueAlpha: CGFloat = 0.66
 
         ctx.saveGState()
 
@@ -1235,17 +1262,17 @@ enum QuantumScene {
             let hour = String(reading.hourMinute.prefix(2))
             let minute = String(reading.hourMinute.suffix(2))
             drawGlowLabel(ctx, hour, at: CGPoint(x: x, y: timeY), size: clockSize,
-                          color: a(C.ice, valueAlpha), kern: clockKern, glow: 0.9)
+                          color: a(C.ice, valueAlpha), kern: clockKern, glow: 1.08)
             drawLabel(ctx, ":", at: CGPoint(x: x + cell * 2, y: timeY), size: clockSize,
                       color: a(C.cyan, valueAlpha * reading.colonAlpha),
                       rightAligned: false, kern: clockKern, glow: 0.55)
             drawGlowLabel(ctx, minute, at: CGPoint(x: x + cell * 3, y: timeY), size: clockSize,
-                          color: a(C.ice, valueAlpha), kern: clockKern, glow: 0.9)
+                          color: a(C.ice, valueAlpha), kern: clockKern, glow: 1.08)
             drawLabel(ctx, ":", at: CGPoint(x: x + cell * 5, y: timeY), size: clockSize,
                       color: a(C.cyan, valueAlpha * reading.colonAlpha),
                       rightAligned: false, kern: clockKern, glow: 0.55)
             drawGlowLabel(ctx, reading.seconds, at: CGPoint(x: x + cell * 6, y: timeY),
-                          size: clockSize, color: a(C.cyan, valueAlpha), kern: clockKern, glow: 0.9)
+                          size: clockSize, color: a(C.cyan, valueAlpha), kern: clockKern, glow: 1.08)
 
             drawLabel(ctx, reading.date, at: CGPoint(x: x, y: dateY), size: micro,
                       color: a(C.ice, 0.34), rightAligned: false, kern: micro * 0.2)
