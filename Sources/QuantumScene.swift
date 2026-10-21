@@ -21,6 +21,9 @@ enum QuantumScene {
     /// briefly. The movie/preview renderers leave it at 0 for determinism.
     static var activity: CGFloat = 0.0
 
+    /// Depth plane factor for parallax - near elements shift MORE than far
+    static let depthFactor: CGFloat = 0.112
+
     /// The animated overlay is split into two passes so the live app can draw
     /// heavy vector geometry at a reduced backing scale while keeping text at
     /// full Retina resolution. The movie and preview renderers run both passes
@@ -145,6 +148,7 @@ enum QuantumScene {
             drawDepthRays(ctx, size: size, center: center, time: t)
             drawTunnel(ctx, size: size, center: center, time: t)
             drawLightSweep(ctx, size: size, center: center, time: t)
+            drawNearBokeh(ctx, size: size, time: t, activity: QuantumScene.activity)
             drawEchoRadar(ctx, size: size, center: center, time: t)
             drawDepthDust(ctx, size: size, center: center, time: t)
             drawTwinkle(ctx, size: size, time: t)
@@ -273,6 +277,7 @@ enum QuantumScene {
     private static func drawMatrixRain(_ ctx: CGContext, size: CGSize, time: Double) {
         let w = size.width, h = size.height
         let s = min(w, h)
+        let activity = QuantumScene.activity
         let layers: [(cols: Int, font: CGFloat, trail: Int, speed: Double, headAlpha: CGFloat)] = [
             (22, s * 0.0062, 4, 0.75, 0.46),
             (6, s * 0.0102, 3, 1.25, 0.60)
@@ -366,6 +371,25 @@ enum QuantumScene {
         ctx.setFillColor(a(C.matrix, 0.028))
         ctx.addPath(path)
         ctx.fillPath()
+    }
+
+    /// Near-field bokeh: a few large, bright green discs in the foreground,
+    /// pulsing with activity-driven parallax so the camera feels immediately
+    /// present in the void.
+    private static func drawNearBokeh(_ ctx: CGContext, size: CGSize,
+                                      time: Double, activity: CGFloat) {
+        let s = min(size.width, size.height)
+        for i in 0..<9 {
+            let fx = (time / loopDuration * rand(i * 53)).truncatingRemainder(dividingBy: 1.0)
+            let fy = rand(i * 31 + 7)
+            let x = CGFloat(fx) * s
+            let y = CGFloat(fy) * s
+            let r = s * (0.018 + 0.042 * activity)
+            // Activity-driven brightness: surges up to ~0.18 when active
+            let alpha = min(0.19, 0.04 + activity * 0.12)
+            ctx.setFillColor(a(C.matrix, alpha))
+            ctx.fillEllipse(in: CGRect(x: x - r, y: y - r, width: r * 2, height: r * 2))
+        }
     }
 
     /// A faint, off-centre sister dish behind the main radar — a second depth

@@ -4,6 +4,11 @@ All notable changes to Quantum Terminal Live are documented here.
 The project is procedural (no stock artwork), local-only (no network), and
 ships a seamless 30-second 8K loop.
 
+## [2.8.0] — 2026-10-20
+### Added
+- Near-field bokeh discs that pulse with activity-driven intensity (more dramatic when you're active).
+- Volumetric light sweep, far echo radar, memory-dump strip, process table, full-frame glitch, activity-reactive rain, boot fade-in, graceful fallback, golden snapshot test, and intensity control.
+
 ## [2.7.0] — 2026-10-20
 ### Added
 - Volumetric light sweep (one revolution per loop) and a far "echo" radar ring for another depth plane.
