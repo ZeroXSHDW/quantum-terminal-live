@@ -4,6 +4,13 @@ All notable changes to Quantum Terminal Live are documented here.
 The project is procedural (no stock artwork), local-only (no network), and
 ships a seamless 30-second 8K loop.
 
+## [2.9.0] — 2026-10-20
+### Added
+- Core pulse rings: expanding violet sonar rings from the core on each pulse beat.
+- Lens flare: a horizontal violet glare streaming through the core with a bright hot spot.
+- Wall tracers: faint diagonal packet streaks crossing the service aisles.
+- Chromatic-aberration RGB split on the full-frame CRT glitch.
+
 ## [2.8.0] — 2026-10-20
 ### Added
 - Near-field bokeh discs that pulse with activity-driven intensity (more dramatic when you're active).

@@ -158,12 +158,15 @@ enum QuantumScene {
             drawBeam(ctx, size: size, center: center, irisR: irisR, time: t)
             drawEnergyRings(ctx, size: size, center: center, irisR: irisR, time: t)
             drawCore(ctx, size: size, center: center, time: t)
+            drawCorePulseRings(ctx, size: size, center: center, irisR: irisR, time: t)
+            drawLensFlare(ctx, size: size, center: center, time: t)
             drawOrbitalTraffic(ctx, size: size, center: center, irisR: irisR, time: t)
             drawPylonTraffic(ctx, size: size, time: t)
             drawParticles(ctx, size: size, time: t)
             drawThreatPings(ctx, size: size, center: center, irisR: irisR, time: t)
             drawScanSweep(ctx, size: size, time: t)
             drawDataStreams(ctx, size: size, time: t)
+            drawWallTracers(ctx, size: size, time: t)
         } else {
             drawCodeRain(ctx, size: size, time: t)
         }
@@ -499,8 +502,8 @@ enum QuantumScene {
         }
     }
 
-    /// A brief full-frame CRT glitch: a handful of bright horizontal tear bands
-    /// with a slight offset, for 0.12 s every 15 s (an integer divisor of the
+    /// A brief full-frame CRT glitch: tear bands plus a chromatic-aberration
+    /// (RGB split) smear, for 0.12 s every 15 s (an integer divisor of the
     /// loop, so it stays seamless).
     private static func drawGlitch(_ ctx: CGContext, size: CGSize, time: Double) {
         let w = size.width, h = size.height
@@ -509,9 +512,17 @@ enum QuantumScene {
         guard cycle < 0.12 else { return }
         let env = CGFloat(1.0 - cycle / 0.12)
         let gi = Int(time / 15.0)
+        let offset = s * 0.006 * env
 
         ctx.saveGState()
         ctx.setBlendMode(.screen)
+
+        // Chromatic aberration: offset red/green/blue channel smears.
+        ctx.setFillColor(a(C.red, 0.025 * env))
+        ctx.fill(CGRect(x: -offset, y: 0, width: w + offset, height: h))
+        ctx.setFillColor(a(C.cyan, 0.020 * env))
+        ctx.fill(CGRect(x: offset, y: 0, width: w + offset, height: h))
+
         for i in 0..<4 {
             let fy = rand(i * 7 + 1 + gi)
             let y = CGFloat(fy) * h
@@ -520,6 +531,81 @@ enum QuantumScene {
             ctx.fill(CGRect(x: 0, y: y, width: w, height: bh))
             ctx.setFillColor(a(C.matrix, 0.045 * env))
             ctx.fill(CGRect(x: s * 0.004, y: y - bh * 2.2, width: w, height: bh * 0.5))
+        }
+        ctx.restoreGState()
+    }
+
+    /// Expanding ripple rings from the core on each pulse beat — a sonar-style
+    /// depth cue that makes the vault feel like it's radiating energy.
+    private static func drawCorePulseRings(_ ctx: CGContext, size: CGSize,
+                                           center: CGPoint, irisR: CGFloat,
+                                           time: Double) {
+        let s = min(size.width, size.height)
+        let pulse = (sin(time * omega * 4.0) + 1.0) * 0.5
+        let phases: [Double] = [0.0, 0.34, 0.67]
+
+        ctx.saveGState()
+        ctx.setBlendMode(.screen)
+        for phase in phases {
+            let p = (pulse + phase).truncatingRemainder(dividingBy: 1.0)
+            let r = irisR * (1.0 + p * 2.6)
+            let alpha = 0.05 * (1.0 - p)
+            ctx.setStrokeColor(a(C.violet, alpha))
+            ctx.setLineWidth(max(1, s * 0.0007))
+            ctx.strokeEllipse(in: CGRect(x: center.x - r, y: center.y - r,
+                                         width: r * 2, height: r * 2))
+        }
+        ctx.restoreGState()
+    }
+
+    /// A horizontal lens-flare glare passing through the core, with a brighter
+    /// hot spot at the core itself. Breathes slowly with the loop.
+    private static func drawLensFlare(_ ctx: CGContext, size: CGSize,
+                                      center: CGPoint, time: Double) {
+        let s = min(size.width, size.height)
+        let strength = 0.55 + 0.45 * sin(time * omega * 2.0)
+        let flareW = size.width * 1.1
+        let flareH = s * 0.0045
+
+        ctx.saveGState()
+        ctx.setBlendMode(.screen)
+        ctx.setFillColor(a(C.violet, 0.018 * strength))
+        ctx.fill(CGRect(x: (size.width - flareW) * 0.5,
+                        y: center.y - flareH * 0.5,
+                        width: flareW, height: flareH))
+        let hotR = s * 0.08
+        ctx.setFillColor(a(C.matrix, 0.045 * strength))
+        ctx.fillEllipse(in: CGRect(x: center.x - hotR, y: center.y - hotR,
+                                   width: hotR * 2, height: hotR * 2))
+        ctx.restoreGState()
+    }
+
+    /// Faint diagonal tracer streaks crossing the service aisles, suggesting
+    /// packets routed through the vault. Subtle and slow so they never compete
+    /// with the data streams.
+    private static func drawWallTracers(_ ctx: CGContext, size: CGSize, time: Double) {
+        let w = size.width, h = size.height
+        let s = min(w, h)
+        let count = 5
+
+        ctx.saveGState()
+        ctx.setBlendMode(.screen)
+        for i in 0..<count {
+            let p = ((time / loopDuration * 2.5 + rand(i * 11 + 5))
+                .truncatingRemainder(dividingBy: 1.0))
+            // Travel left-to-right across the middle band, wrapping at the seam.
+            let x = w * (-0.12 + p * 1.24)
+            let y = h * (0.50 + rand(i * 29) * 0.12)
+            guard x > -s * 0.06 && x < w + s * 0.06 else { continue }
+            let len = s * (0.035 + 0.025 * rand(i * 17))
+            let alpha = 0.04 + 0.03 * rand(i * 23)
+            ctx.setFillColor(a(C.cyan, alpha))
+            let path = CGMutablePath()
+            path.move(to: CGPoint(x: x - len * 0.5, y: y))
+            path.addLine(to: CGPoint(x: x + len * 0.5, y: y - len * 0.28))
+            ctx.addPath(path)
+            ctx.setLineWidth(max(1, s * 0.0014))
+            ctx.strokePath()
         }
         ctx.restoreGState()
     }
