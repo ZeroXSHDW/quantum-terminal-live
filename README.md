@@ -1,3 +1,7 @@
+<!-- zerodevllc-theme -->
+[![ZeroDevLLC](https://img.shields.io/badge/ZeroDevLLC-cyber--deck-00ff88?style=for-the-badge&labelColor=050a08)](https://ZeroDevLLC.com)
+[![Theme](https://img.shields.io/badge/theme-3D%20cyber-00f0ff?style=flat-square&labelColor=050a08)](https://ZeroDevLLC.com)
+
 # Quantum Terminal Live
 
 [![CI](https://github.com/ZeroXSHDW/quantum-terminal-live/actions/workflows/ci.yml/badge.svg)](https://github.com/ZeroXSHDW/quantum-terminal-live/actions/workflows/ci.yml)
@@ -251,3 +255,7 @@ MIT — see [LICENSE](LICENSE).
 ---
 
 Part of the [ZeroDevLLC](https://ZeroDevLLC.com) ecosystem.
+
+---
+
+<p align="center"><sub><code>ZeroDevLLC · cyber-deck · local-first · no cloud · no telemetry</code></sub></p>
