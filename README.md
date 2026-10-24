@@ -247,3 +247,7 @@ for the first push, CI behavior and Git LFS options.
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+---
+
+Part of the [ZeroDevLLC](https://ZeroDevLLC.com) ecosystem.
