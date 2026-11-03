@@ -5,6 +5,8 @@
 [![Theme](https://img.shields.io/badge/theme-3D%20cyber-00f0ff?style=flat-square&labelColor=050a08)](https://ZeroDevLLC.com)
 
 # Quantum Terminal Live
+![ZeroXSHDW](https://img.shields.io/badge/ZeroXSHDW-8f45c8?style=for-the-badge)
+![Reviewed](https://img.shields.io/badge/reviewed-by-OpenCode-8e44ad?style=for-the-badge)
 
 [![CI](https://github.com/ZeroXSHDW/quantum-terminal-live/actions/workflows/ci.yml/badge.svg)](https://github.com/ZeroXSHDW/quantum-terminal-live/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-00ff40.svg)](LICENSE)
